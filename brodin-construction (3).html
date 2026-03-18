@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brodin Construction</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green-dark: #1a5c1a;
+    --green-mid: #2e8b2e;
+    --green-bright: #3cb83c;
+    --green-light: #e8f5e8;
+    --black: #111111;
+    --black-soft: #1c1c1c;
+    --charcoal: #2a2a2a;
+    --white: #ffffff;
+    --off-white: #f5f5f5;
+    --text-dark: #111111;
+    --text-mid: #444;
+    --text-light: #777;
+    --border: #e0e0e0;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    color: var(--text-dark);
+    background: var(--white);
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4, nav { font-family: 'Oswald', sans-serif; }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--black);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  }
+
+  .nav-logo img { height: 56px; padding: 8px 0; display: block; }
+
+  .nav-links {
+    display: flex; gap: 8px; list-style: none;
+  }
+
+  .nav-links a {
+    color: #c8e6c8;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    padding: 8px 14px;
+    border-radius: 4px;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .nav-links a:hover { background: rgba(255,255,255,0.12); color: #fff; }
+
+  .nav-cta {
+    background: var(--green-bright);
+    color: #fff !important;
+    padding: 8px 20px !important;
+    border-radius: 4px;
+  }
+
+  .nav-cta:hover { background: #2ea82e !important; }
+
+  /* ── HERO ── */
+  #hero {
+    background: linear-gradient(135deg, var(--black) 0%, var(--charcoal) 50%, #1a2a1a 100%);
+    color: #fff;
+    padding: 100px 5% 90px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='60' height='60' fill='none'/%3E%3Cpath d='M0 60L60 0M-10 10L10-10M50 70L70 50' stroke='%23ffffff08' stroke-width='1'/%3E%3C/svg%3E");
+  }
+
+  .hero-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+    position: relative;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: rgba(60,184,60,0.25);
+    border: 1px solid rgba(60,184,60,0.5);
+    color: #7ddc7d;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 3px;
+    margin-bottom: 20px;
+  }
+
+  #hero h1 {
+    font-size: clamp(36px, 5vw, 58px);
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: 1px;
+    margin-bottom: 24px;
+    color: #fff;
+  }
+
+  #hero h1 span { color: var(--green-bright); }
+
+  #hero p {
+    font-size: 18px;
+    color: #b0d4b0;
+    margin-bottom: 36px;
+    max-width: 480px;
+    line-height: 1.7;
+  }
+
+  .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+
+  .btn-primary {
+    background: var(--green-bright);
+    color: #fff;
+    padding: 14px 30px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: background 0.2s, transform 0.15s;
+    border: none; cursor: pointer;
+  }
+
+  .btn-primary:hover { background: #2ea82e; transform: translateY(-1px); }
+
+  .btn-outline {
+    background: transparent;
+    color: #fff;
+    border: 2px solid rgba(255,255,255,0.4);
+    padding: 12px 28px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .btn-outline:hover { border-color: #fff; background: rgba(255,255,255,0.08); }
+
+  .hero-stats {
+    display: flex; gap: 32px; margin-top: 48px;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    padding-top: 32px;
+  }
+
+  .stat-val {
+    font-family: 'Oswald', sans-serif;
+    font-size: 36px; font-weight: 700;
+    color: var(--green-bright);
+  }
+
+  .stat-label { font-size: 13px; color: #8abc8a; letter-spacing: 0.5px; }
+
+  .hero-visual {
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .hero-card {
+    background: rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 12px;
+    padding: 32px;
+    width: 100%; max-width: 380px;
+  }
+
+  .hero-card h3 {
+    font-size: 18px; color: #fff; margin-bottom: 20px;
+    font-weight: 500; letter-spacing: 0.5px;
+  }
+
+  .service-pill {
+    display: flex; align-items: center; gap: 12px;
+    background: rgba(60,184,60,0.12);
+    border: 1px solid rgba(60,184,60,0.3);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 10px;
+  }
+
+  .service-icon {
+    width: 32px; height: 32px;
+    background: var(--black);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+  }
+
+  .service-pill span { color: #c8e6c8; font-size: 14px; font-weight: 600; font-family: 'Oswald', sans-serif; letter-spacing: 0.5px; }
+
+  /* ── SECTIONS ── */
+  section { padding: 90px 5%; }
+
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+
+  .section-tag {
+    font-size: 12px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--green-mid); font-weight: 600; margin-bottom: 12px;
+    font-family: 'Oswald', sans-serif;
+  }
+
+  .section-title {
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 700; line-height: 1.1;
+    color: var(--text-dark); margin-bottom: 16px;
+    letter-spacing: 0.5px;
+  }
+
+  .section-sub {
+    font-size: 17px; color: var(--text-light);
+    max-width: 560px; line-height: 1.7;
+    margin-bottom: 56px;
+  }
+
+  /* ── ABOUT ── */
+  #about { background: var(--off-white); }
+
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center;
+  }
+
+  .about-visual {
+    position: relative;
+  }
+
+  .about-img-box {
+    background: var(--black);
+    border-radius: 12px;
+    height: 380px;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .about-img-box svg { opacity: 0.7; }
+
+  .about-badge {
+    position: absolute; bottom: -20px; right: -20px;
+    background: var(--green-bright);
+    color: #fff; border-radius: 50%;
+    width: 120px; height: 120px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    font-family: 'Oswald', sans-serif;
+    box-shadow: 0 4px 20px rgba(46,139,46,0.4);
+  }
+
+  .about-badge .big { font-size: 36px; font-weight: 700; line-height: 1; }
+  .about-badge .sm { font-size: 12px; font-weight: 500; letter-spacing: 1px; }
+
+  .about-content h2 { margin-bottom: 20px; }
+
+  .about-content p { color: var(--text-mid); font-size: 16px; line-height: 1.8; margin-bottom: 20px; }
+
+  .values-list {
+    list-style: none; margin-top: 28px;
+  }
+
+  .values-list li {
+    display: flex; align-items: flex-start; gap: 12px;
+    font-size: 15px; color: var(--text-mid);
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .check-icon {
+    width: 20px; height: 20px; min-width: 20px;
+    background: var(--green-bright);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin-top: 2px;
+  }
+
+  .check-icon::after {
+    content: '';
+    width: 10px; height: 6px;
+    border-left: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    transform: rotate(-45deg) translateY(-1px);
+    display: block;
+  }
+
+  /* ── SERVICES ── */
+  #services { background: var(--white); }
+
+  .services-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px;
+  }
+
+  .service-card {
+    background: var(--off-white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 32px 28px;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    cursor: default;
+  }
+
+  .service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(46,139,46,0.12);
+    border-color: var(--green-bright);
+  }
+
+  .svc-icon-wrap {
+    width: 56px; height: 56px;
+    background: var(--black);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .service-card h3 {
+    font-size: 20px; font-weight: 600;
+    color: var(--text-dark); margin-bottom: 10px;
+    letter-spacing: 0.3px;
+  }
+
+  .service-card p { font-size: 14px; color: var(--text-light); line-height: 1.7; }
+
+  /* ── GALLERY ── */
+  #gallery { background: var(--black); }
+
+  #gallery .section-tag { color: #7ddc7d; }
+  #gallery .section-title { color: #fff; }
+  #gallery .section-sub { color: #8abc8a; }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 220px 220px;
+    gap: 16px;
+  }
+
+  .gallery-item {
+    border-radius: 10px; overflow: hidden;
+    position: relative; cursor: pointer;
+    background: #1a1a1a;
+  }
+
+  .gallery-item:first-child {
+    grid-row: 1 / 3;
+  }
+
+  .gallery-inner {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px; font-weight: 500;
+    letter-spacing: 1px;
+    color: rgba(255,255,255,0.3);
+    position: relative;
+    transition: background 0.3s;
+    background: rgba(0,0,0,0.2);
+  }
+
+  .gallery-item:hover .gallery-inner { background: rgba(0,0,0,0.45); }
+
+  .gallery-label {
+    position: absolute; bottom: 16px; left: 16px;
+    background: rgba(0,0,0,0.6);
+    color: #fff;
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px; letter-spacing: 1px;
+    padding: 6px 12px; border-radius: 4px;
+    opacity: 0; transition: opacity 0.2s;
+  }
+
+  .gallery-item:hover .gallery-label { opacity: 1; }
+
+  /* SVG house illustrations */
+  .gallery-svg { width: 100%; height: 100%; }
+
+  /* ── CONTACT ── */
+
+  /* ── CONTACT ── */
+  #contact { background: var(--white); }
+
+  .contact-grid {
+    display: grid; grid-template-columns: 1fr 1.4fr; gap: 72px; align-items: start;
+  }
+
+  .contact-info h2 { margin-bottom: 20px; }
+
+  .contact-info p { color: var(--text-mid); font-size: 16px; line-height: 1.8; margin-bottom: 32px; }
+
+  .contact-item {
+    display: flex; align-items: flex-start; gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  .c-icon {
+    width: 40px; height: 40px; min-width: 40px;
+    background: var(--green-light);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .contact-item h4 {
+    font-size: 13px; color: var(--text-light); font-weight: 400; font-family: 'Source Sans 3', sans-serif;
+    margin-bottom: 2px;
+  }
+
+  .contact-item p { font-size: 15px; color: var(--text-dark); font-weight: 600; margin: 0; }
+
+  .quote-form {
+    background: var(--off-white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 40px;
+  }
+
+  .quote-form h3 {
+    font-size: 24px; margin-bottom: 8px; color: var(--text-dark);
+    font-weight: 600; letter-spacing: 0.3px;
+  }
+
+  .quote-form .form-sub {
+    font-size: 14px; color: var(--text-light); margin-bottom: 28px;
+  }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+
+  .form-group { margin-bottom: 16px; }
+  .form-group label { display: block; font-size: 13px; font-weight: 600; color: var(--text-mid); margin-bottom: 6px; }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 7px;
+    padding: 11px 14px;
+    font-size: 15px;
+    font-family: 'Source Sans 3', sans-serif;
+    color: var(--text-dark);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { border-color: var(--green-bright); }
+
+  .form-group textarea { resize: vertical; min-height: 100px; }
+
+  .form-submit {
+    width: 100%; padding: 14px;
+    background: var(--black);
+    color: #fff;
+    border: none; border-radius: 7px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 17px; font-weight: 600; letter-spacing: 1px;
+    cursor: pointer; transition: background 0.2s;
+    margin-top: 8px;
+  }
+
+  .form-submit:hover { background: var(--charcoal); }
+
+  .form-success {
+    display: none;
+    text-align: center; padding: 24px;
+    color: var(--green-mid);
+    font-size: 16px; font-weight: 600;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--black);
+    color: #888;
+    padding: 48px 5% 32px;
+  }
+
+  .footer-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    margin-bottom: 28px;
+  }
+
+  .footer-brand p { font-size: 14px; line-height: 1.7; max-width: 280px; margin-top: 14px; }
+
+  .footer-col h4 {
+    font-size: 15px; color: #fff; font-weight: 600; letter-spacing: 0.5px;
+    margin-bottom: 16px;
+  }
+
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 9px; }
+  .footer-col ul a {
+    color: #888; text-decoration: none; font-size: 14px;
+    transition: color 0.2s;
+  }
+  .footer-col ul a:hover { color: var(--green-bright); }
+
+  .footer-bottom {
+    max-width: 1100px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 13px;
+  }
+
+  .footer-logo { height: 44px; }
+
+  /* ── CHATBOT ── */
+  #chat-bubble {
+    position: fixed; bottom: 28px; right: 28px; z-index: 999;
+  }
+
+  #chat-toggle {
+    width: 60px; height: 60px;
+    background: var(--black);
+    border-radius: 50%;
+    border: 3px solid var(--green-bright);
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    transition: transform 0.2s, background 0.2s;
+  }
+
+  #chat-toggle:hover { transform: scale(1.08); background: var(--charcoal); }
+
+  #chat-window {
+    position: absolute; bottom: 74px; right: 0;
+    width: 360px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: 0 12px 48px rgba(0,0,0,0.18);
+    overflow: hidden;
+    display: none;
+    flex-direction: column;
+    max-height: 520px;
+  }
+
+  #chat-window.open { display: flex; }
+
+  .chat-header {
+    background: var(--black);
+    padding: 16px 20px;
+    display: flex; align-items: center; gap: 12px;
+  }
+
+  .chat-avatar {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: var(--green-bright);
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .chat-header-text h4 {
+    color: #fff; font-size: 15px; font-weight: 600; margin: 0;
+  }
+
+  .chat-header-text p {
+    color: #aaa; font-size: 12px; margin: 0;
+    font-family: 'Source Sans 3', sans-serif;
+  }
+
+  .online-dot {
+    width: 8px; height: 8px; background: #4ade80;
+    border-radius: 50%; display: inline-block; margin-right: 4px;
+  }
+
+  #chat-messages {
+    flex: 1; overflow-y: auto;
+    padding: 16px; display: flex; flex-direction: column; gap: 10px;
+  }
+
+  .msg {
+    max-width: 85%; font-size: 14px; line-height: 1.5;
+    padding: 10px 14px; border-radius: 12px;
+  }
+
+  .msg.bot {
+    background: var(--off-white);
+    border: 1px solid var(--border);
+    color: var(--text-dark);
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+  }
+
+  .msg.user {
+    background: var(--green-dark);
+    color: #fff;
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+  }
+
+  .typing { display: flex; gap: 4px; align-items: center; padding: 12px 14px; }
+  .typing span {
+    width: 7px; height: 7px; background: #aaa; border-radius: 50%;
+    animation: bounce 1.2s infinite;
+  }
+  .typing span:nth-child(2) { animation-delay: 0.2s; }
+  .typing span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes bounce { 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-6px)} }
+
+  .quick-btns {
+    display: flex; flex-wrap: wrap; gap: 6px;
+    padding: 0 16px 10px;
+  }
+
+  .qbtn {
+    background: var(--green-light);
+    border: 1px solid var(--border);
+    color: var(--green-dark);
+    font-size: 12px; font-weight: 600;
+    padding: 5px 10px; border-radius: 20px;
+    cursor: pointer; transition: background 0.2s;
+    font-family: 'Source Sans 3', sans-serif;
+  }
+
+  .qbtn:hover { background: #c0dec0; }
+
+  .chat-input-row {
+    display: flex; gap: 8px;
+    padding: 12px;
+    border-top: 1px solid var(--border);
+  }
+
+  #chat-input {
+    flex: 1;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 9px 12px;
+    font-size: 14px;
+    font-family: 'Source Sans 3', sans-serif;
+    outline: none;
+    color: var(--text-dark);
+  }
+
+  #chat-input:focus { border-color: var(--green-bright); }
+
+  #chat-send {
+    background: var(--black);
+    color: #fff;
+    border: none; border-radius: 8px;
+    padding: 9px 14px; cursor: pointer;
+    font-size: 18px;
+    transition: background 0.2s;
+  }
+
+  #chat-send:hover { background: var(--charcoal); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .hero-inner, .about-grid, .contact-grid { grid-template-columns: 1fr; }
+    .hero-visual { display: none; }
+    .footer-inner { grid-template-columns: 1fr 1fr; }
+    .gallery-grid {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto;
+    }
+    .gallery-item:first-child { grid-row: auto; }
+  }
+
+  @media (max-width: 600px) {
+    nav { flex-wrap: wrap; gap: 4px; padding: 8px 4%; }
+    .nav-links { gap: 2px; }
+    .nav-links a { font-size: 13px; padding: 6px 8px; }
+    .form-row { grid-template-columns: 1fr; }
+    .footer-inner { grid-template-columns: 1fr; gap: 24px; }
+    #chat-window { width: 300px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <svg height="48" viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg">
+      <text x="0" y="38" font-family="Oswald,sans-serif" font-size="40" font-weight="700" fill="#3cb83c">BRODIN</text>
+      <rect x="0" y="42" width="185" height="20" rx="3" fill="#1a5c1a"/>
+      <text x="6" y="57" font-family="Oswald,sans-serif" font-size="14" font-weight="600" fill="#fff" letter-spacing="2">CONSTRUCTION</text>
+      <!-- mini house -->
+      <g transform="translate(195,4)">
+        <polygon points="40,20 20,4 0,20" fill="#1a5c1a" stroke="#3cb83c" stroke-width="1.5"/>
+        <rect x="4" y="20" width="32" height="24" fill="#1a5c1a" stroke="#3cb83c" stroke-width="1.5"/>
+        <rect x="14" y="28" width="12" height="16" fill="#3cb83c"/>
+        <rect x="6" y="23" width="8" height="7" fill="#3cb83c"/>
+        <rect x="26" y="23" width="8" height="7" fill="#3cb83c"/>
+      </g>
+    </svg>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <div class="hero-badge">Colorado's Trusted Contractor</div>
+      <h1>Quality Work,<br><span>Done Right</span><br>Every Time</h1>
+      <p>Brodin Construction is your local general contractor for remodels, concrete, decks, fences, and more — delivering honest pricing and craftsmanship you can count on.</p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-primary">Get a Free Quote</a>
+        <a href="#gallery" class="btn-outline">View Our Work</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="stat-val">15+</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div>
+          <div class="stat-val">300+</div>
+          <div class="stat-label">Projects Completed</div>
+        </div>
+        <div>
+          <div class="stat-val">100%</div>
+          <div class="stat-label">Satisfaction Goal</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card">
+        <h3>What We Do</h3>
+        <div class="service-pill">
+          <div class="service-icon">🔨</div>
+          <span>Remodels & Renovations</span>
+        </div>
+        <div class="service-pill">
+          <div class="service-icon">🪨</div>
+          <span>Concrete Work</span>
+        </div>
+        <div class="service-pill">
+          <div class="service-icon">🌲</div>
+          <span>Decks & Fences</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-visual">
+        <div class="about-img-box">
+          <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" class="gallery-svg">
+            <!-- House illustration -->
+            <rect width="400" height="300" fill="#111111"/>
+            <!-- Ground -->
+            <rect x="0" y="220" width="400" height="80" fill="#1a1a1a"/>
+            <!-- Main house body -->
+            <rect x="80" y="130" width="240" height="120" fill="#222222"/>
+            <!-- Roof -->
+            <polygon points="200,40 60,140 340,140" fill="#2e8b2e"/>
+            <!-- Chimney -->
+            <rect x="240" y="60" width="24" height="60" fill="#1a1a1a"/>
+            <!-- Door -->
+            <rect x="172" y="185" width="56" height="65" rx="3" fill="#3cb83c"/>
+            <circle cx="220" cy="218" r="4" fill="#111111"/>
+            <!-- Windows -->
+            <rect x="100" y="155" width="50" height="40" rx="3" fill="#3cb83c"/>
+            <line x1="125" y1="155" x2="125" y2="195" stroke="#111111" stroke-width="2"/>
+            <line x1="100" y1="175" x2="150" y2="175" stroke="#111111" stroke-width="2"/>
+            <rect x="250" y="155" width="50" height="40" rx="3" fill="#3cb83c"/>
+            <line x1="275" y1="155" x2="275" y2="195" stroke="#111111" stroke-width="2"/>
+            <line x1="250" y1="175" x2="300" y2="175" stroke="#111111" stroke-width="2"/>
+            <!-- Tree -->
+            <rect x="340" y="160" width="10" height="60" fill="#1a1a1a"/>
+            <circle cx="345" cy="140" r="30" fill="#2e8b2e"/>
+            <circle cx="325" cy="155" r="18" fill="#2e8b2e"/>
+            <circle cx="365" cy="148" r="20" fill="#27741c"/>
+            <!-- Path -->
+            <polygon points="172,250 228,250 240,300 160,300" fill="#2a2a2a"/>
+          </svg>
+        </div>
+        <div class="about-badge">
+          <span class="big">15+</span>
+          <span class="sm">YRS BUILT</span>
+        </div>
+      </div>
+      <div class="about-content">
+        <div class="section-tag">Who We Are</div>
+        <h2 class="section-title">Built on Integrity, Crafted with Pride</h2>
+        <p>Brodin Construction has been serving Colorado homeowners for over 15 years. We started as a small family operation with one simple promise: do the job right, treat people fairly, and stand behind every nail we drive.</p>
+        <p>Today we're a full-service general contractor tackling everything from kitchen remodels and bathroom upgrades to decks, fences, concrete, and roofing — but that original promise hasn't changed one bit.</p>
+        <ul class="values-list">
+          <li><div class="check-icon"></div>Transparent pricing — no surprise add-ons</li>
+          <li><div class="check-icon"></div>All work guaranteed with written warranty</li>
+          <li><div class="check-icon"></div>Locally owned and community-focused</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-inner">
+    <div class="section-tag">What We Do</div>
+    <h2 class="section-title">Our Services</h2>
+    <p class="section-sub">We handle a wide range of residential projects — no job too big or too small. If it takes skill and integrity to get right, we're the crew for it.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="svc-icon-wrap">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z" stroke="#3cb83c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3>Remodels & Renovations</h3>
+        <p>Kitchens, bathrooms, basements, additions — we transform your existing space into exactly what you need. Quality finishes, clean work, done on schedule.</p>
+      </div>
+      <div class="service-card">
+        <div class="svc-icon-wrap">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="14" width="20" height="8" rx="2" stroke="#3cb83c" stroke-width="2"/>
+            <path d="M6 14V8a2 2 0 012-2h8a2 2 0 012 2v6" stroke="#3cb83c" stroke-width="2" stroke-linecap="round"/>
+            <path d="M2 18h20" stroke="#3cb83c" stroke-width="2"/>
+          </svg>
+        </div>
+        <h3>Concrete Work</h3>
+        <p>Driveways, patios, walkways, foundations, and retaining walls. Precision poured and properly finished to handle Colorado's tough freeze-thaw cycles year after year.</p>
+      </div>
+      <div class="service-card">
+        <div class="svc-icon-wrap">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="3" width="18" height="4" rx="1" stroke="#3cb83c" stroke-width="2"/>
+            <path d="M5 7v12M19 7v12M5 13h14" stroke="#3cb83c" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>Decks & Fences</h3>
+        <p>Custom decks, pergolas, privacy fences, and rail systems built to last and look great. We work with wood, composite, and vinyl to match your home and budget.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="section-inner">
+    <div class="section-tag">Portfolio</div>
+    <h2 class="section-title">Our Work Speaks for Itself</h2>
+    <p class="section-sub">A sampling of completed projects across Colorado — remodels, concrete, decks, and fences.</p>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <div class="gallery-inner">
+          <svg viewBox="0 0 300 440" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
+            <rect width="300" height="440" fill="#111111"/>
+            <rect x="0" y="310" width="300" height="130" fill="#1a1a1a"/>
+            <rect x="40" y="170" width="220" height="170" fill="#222222"/>
+            <polygon points="150,40 20,180 280,180" fill="#2a2a2a"/>
+            <rect x="160" y="100" width="22" height="70" fill="#1a1a1a"/>
+            <rect x="115" y="235" width="70" height="105" rx="4" fill="#3cb83c"/>
+            <circle cx="176" cy="285" r="5" fill="#111111"/>
+            <rect x="52" y="195" width="55" height="50" rx="3" fill="#3cb83c"/>
+            <line x1="79" y1="195" x2="79" y2="245" stroke="#111111" stroke-width="2"/>
+            <line x1="52" y1="220" x2="107" y2="220" stroke="#111111" stroke-width="2"/>
+            <rect x="193" y="195" width="55" height="50" rx="3" fill="#3cb83c"/>
+            <line x1="220" y1="195" x2="220" y2="245" stroke="#111111" stroke-width="2"/>
+            <line x1="193" y1="220" x2="248" y2="220" stroke="#111111" stroke-width="2"/>
+            <rect x="30" y="310" width="14" height="80" fill="#1a1a1a"/>
+            <circle cx="37" cy="290" r="30" fill="#2e8b2e"/>
+            <circle cx="22" cy="305" r="18" fill="#27741c"/>
+            <circle cx="52" cy="298" r="22" fill="#246024"/>
+          </svg>
+        </div>
+        <div class="gallery-label">Bathroom Remodel</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-inner">
+          <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
+            <rect width="300" height="200" fill="#0a2e0a"/>
+            <rect x="0" y="130" width="300" height="70" fill="#112211"/>
+            <rect x="30" y="70" width="240" height="90" fill="#1a5c1a"/>
+            <rect x="30" y="50" width="240" height="25" fill="#2e8b2e"/>
+            <rect x="0" y="75" width="30" height="5" fill="#3cb83c"/>
+            <rect x="270" y="75" width="30" height="5" fill="#3cb83c"/>
+            <rect x="40" y="80" width="220" height="4" fill="#3cb83c"/>
+            <rect x="40" y="92" width="220" height="4" fill="#3cb83c"/>
+            <rect x="40" y="104" width="220" height="4" fill="#3cb83c"/>
+            <rect x="40" y="116" width="220" height="4" fill="#3cb83c"/>
+            <rect x="40" y="128" width="220" height="4" fill="#3cb83c"/>
+            <rect x="100" y="128" width="100" height="35" rx="2" fill="#0f3d0f"/>
+          </svg>
+        </div>
+        <div class="gallery-label">Roof Replacement</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-inner">
+          <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
+            <rect width="300" height="200" fill="#0a2e0a"/>
+            <rect x="0" y="120" width="300" height="80" fill="#1a5c1a"/>
+            <rect x="20" y="140" width="260" height="6" fill="#2e8b2e" rx="2"/>
+            <rect x="40" y="152" width="220" height="6" fill="#2e8b2e" rx="2"/>
+            <rect x="20" y="164" width="260" height="6" fill="#2e8b2e" rx="2"/>
+            <rect x="0" y="115" width="300" height="10" fill="#3cb83c" rx="2"/>
+            <rect x="30" y="40" width="80" height="80" fill="#1a5c1a" rx="4"/>
+            <rect x="40" y="55" width="60" height="40" fill="#3cb83c" rx="2"/>
+            <rect x="190" y="50" width="80" height="70" fill="#1a5c1a" rx="4"/>
+            <rect x="200" y="60" width="60" height="35" fill="#3cb83c" rx="2"/>
+            <rect x="130" y="60" width="40" height="55" fill="#246024" rx="2"/>
+          </svg>
+        </div>
+        <div class="gallery-label">Kitchen Remodel</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-inner">
+          <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
+            <rect width="300" height="200" fill="#0a2e0a"/>
+            <rect x="0" y="150" width="300" height="50" fill="#112211"/>
+            <rect x="20" y="155" width="260" height="40" fill="#1a5c1a" rx="3"/>
+            <rect x="20" y="150" width="260" height="12" fill="#2e8b2e" rx="2"/>
+            <line x1="20" y1="162" x2="280" y2="162" stroke="#3cb83c" stroke-width="1"/>
+            <rect x="0" y="140" width="300" height="15" fill="#3cb83c" rx="2"/>
+            <line x1="20" y1="150" x2="20" y2="200" stroke="#2e8b2e" stroke-width="3"/>
+            <line x1="80" y1="150" x2="80" y2="200" stroke="#2e8b2e" stroke-width="3"/>
+            <line x1="140" y1="150" x2="140" y2="200" stroke="#2e8b2e" stroke-width="3"/>
+            <line x1="200" y1="150" x2="200" y2="200" stroke="#2e8b2e" stroke-width="3"/>
+            <line x1="260" y1="150" x2="260" y2="200" stroke="#2e8b2e" stroke-width="3"/>
+            <rect x="40" y="50" width="200" height="90" rx="6" fill="#1a5c1a"/>
+            <rect x="55" y="65" width="80" height="60" rx="3" fill="#3cb83c"/>
+            <rect x="165" y="65" width="60" height="60" rx="3" fill="#3cb83c"/>
+          </svg>
+        </div>
+        <div class="gallery-label">Concrete Driveway</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-inner">
+          <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
+            <rect width="300" height="200" fill="#0a2e0a"/>
+            <rect x="0" y="130" width="300" height="70" fill="#112211"/>
+            <rect x="50" y="80" width="200" height="80" fill="#1a5c1a"/>
+            <polygon points="150,20 30,90 270,90" fill="#246024"/>
+            <rect x="110" y="120" width="80" height="40" rx="3" fill="#3cb83c"/>
+            <rect x="60" y="95" width="40" height="30" rx="2" fill="#3cb83c"/>
+            <rect x="200" y="95" width="40" height="30" rx="2" fill="#3cb83c"/>
+            <rect x="0" y="130" width="50" height="8" fill="#1a5c1a"/>
+            <rect x="250" y="130" width="50" height="8" fill="#1a5c1a"/>
+          </svg>
+        </div>
+        <div class="gallery-label">Deck Build</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="section-tag">Get In Touch</div>
+        <h2 class="section-title">Request a Free Quote</h2>
+        <p>Ready to start your project? Fill out the form and we'll get back to you within 24 hours to schedule a free on-site consultation.</p>
+        <div class="contact-item">
+          <div class="c-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.09 2.18 2 2 0 012.07 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke="#2e8b2e" stroke-width="2"/></svg>
+          </div>
+          <div>
+            <h4>Phone</h4>
+            <p>(720) 736-6855</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="c-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="#2e8b2e" stroke-width="2"/><polyline points="22,6 12,13 2,6" stroke="#2e8b2e" stroke-width="2"/></svg>
+          </div>
+          <div>
+            <h4>Email</h4>
+            <p>info@brodinconstruction.com</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="c-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z" stroke="#2e8b2e" stroke-width="2"/><circle cx="12" cy="10" r="3" stroke="#2e8b2e" stroke-width="2"/></svg>
+          </div>
+          <div>
+            <h4>Service Area</h4>
+            <p>Colorado Springs & Surrounding Areas</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="c-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#2e8b2e" stroke-width="2"/><polyline points="12,6 12,12 16,14" stroke="#2e8b2e" stroke-width="2"/></svg>
+          </div>
+          <div>
+            <h4>Hours</h4>
+            <p>Mon–Fri 7am–6pm · Sat 8am–2pm</p>
+          </div>
+        </div>
+      </div>
+      <div class="quote-form">
+        <h3>Free Estimate Request</h3>
+        <p class="form-sub">No obligation — we'll come to you and provide a detailed written quote.</p>
+        <div id="form-body">
+          <div class="form-row">
+            <div class="form-group">
+              <label>First Name</label>
+              <input id="f-fname" type="text" placeholder="John">
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input id="f-lname" type="text" placeholder="Smith">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Phone</label>
+              <input id="f-phone" type="tel" placeholder="(720) 736-6855">
+            </div>
+            <div class="form-group">
+              <label>Email</label>
+              <input id="f-email" type="email" placeholder="you@email.com">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Service Needed</label>
+            <select id="f-service">
+              <option value="">Select a service...</option>
+              <option>Remodel / Renovation</option>
+              <option>Concrete Work</option>
+              <option>Deck or Pergola</option>
+              <option>Fence</option>
+              <option>Multiple Services</option>
+              <option>Not Sure — Need Consultation</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Project Address / Location</label>
+            <input id="f-address" type="text" placeholder="Colorado Springs, CO">
+          </div>
+          <div class="form-group">
+            <label>Tell Us About Your Project</label>
+            <textarea id="f-message" placeholder="Describe what you're looking to build or repair. As much detail as you can share helps us prepare for the visit."></textarea>
+          </div>
+          <button class="form-submit" id="submit-btn" onclick="submitForm()">SEND MY REQUEST →</button>
+          <div id="form-error" style="display:none;color:#c0392b;font-size:13px;margin-top:10px;text-align:center;"></div>
+        </div>
+        <div class="form-success" id="form-success">
+          <div style="font-size:40px;margin-bottom:12px;">✅</div>
+          <div>Thank you! We'll be in touch within 24 hours.</div>
+          <div style="font-size:14px;color:#777;margin-top:8px;font-weight:400;">Or call us now at (720) 736-6855</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <svg height="40" viewBox="0 0 220 46" xmlns="http://www.w3.org/2000/svg">
+        <text x="0" y="30" font-family="Oswald,sans-serif" font-size="32" font-weight="700" fill="#3cb83c">BRODIN</text>
+        <rect x="0" y="33" width="148" height="16" rx="2" fill="#1a5c1a"/>
+        <text x="4" y="45" font-family="Oswald,sans-serif" font-size="11" font-weight="600" fill="#fff" letter-spacing="2">CONSTRUCTION</text>
+      </svg>
+      <p>Colorado's trusted general contractor for remodels, concrete, decks, and fences. Built right. Built to last.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#services">Remodels & Renovations</a></li>
+        <li><a href="#services">Concrete Work</a></li>
+        <li><a href="#services">Decks & Fences</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#contact">Get a Quote</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Brodin Construction · Colorado Springs, CO</span>
+  </div>
+</footer>
+
+<!-- CHATBOT -->
+<div id="chat-bubble">
+  <div id="chat-window">
+    <div class="chat-header">
+      <div class="chat-avatar">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 21h18M3 10l9-7 9 7M5 10v11M19 10v11M9 14h6M9 14v7M15 14v7" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="chat-header-text">
+        <h4>Brodin Assistant</h4>
+        <p><span class="online-dot"></span>Available 24/7 · Answers in seconds</p>
+      </div>
+    </div>
+    <div id="chat-messages">
+      <div class="msg bot">👋 Hi! I'm the Brodin Construction assistant. I can answer questions about our services, pricing, and timeline — or help you start a quote request. What can I help you with?</div>
+    </div>
+    <div class="quick-btns" id="quick-btns">
+      <button class="qbtn" onclick="sendQuick('What services do you offer?')">Services</button>
+      <button class="qbtn" onclick="sendQuick('How much does a new home build cost?')">Pricing</button>
+      <button class="qbtn" onclick="sendQuick('How long does a roof replacement take?')">Timeline</button>
+      <button class="qbtn" onclick="sendQuick('Are you licensed and insured?')">Licensing</button>
+    </div>
+    <div class="chat-input-row">
+      <input id="chat-input" type="text" placeholder="Ask anything..." onkeydown="if(event.key==='Enter')sendMsg()">
+      <button id="chat-send" onclick="sendMsg()">↑</button>
+    </div>
+  </div>
+  <button id="chat-toggle" onclick="toggleChat()" title="Chat with us">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="#3cb83c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+function toggleChat() {
+  const w = document.getElementById('chat-window');
+  w.classList.toggle('open');
+  if (w.classList.contains('open')) {
+    setTimeout(() => document.getElementById('chat-input').focus(), 100);
+  }
+}
+
+function sendQuick(txt) {
+  document.getElementById('quick-btns').style.display = 'none';
+  addMsg(txt, 'user');
+  getBotReply(txt);
+}
+
+function sendMsg() {
+  const inp = document.getElementById('chat-input');
+  const txt = inp.value.trim();
+  if (!txt) return;
+  inp.value = '';
+  document.getElementById('quick-btns').style.display = 'none';
+  addMsg(txt, 'user');
+  getBotReply(txt);
+}
+
+function addMsg(text, role) {
+  const box = document.getElementById('chat-messages');
+  const div = document.createElement('div');
+  div.className = 'msg ' + role;
+  div.textContent = text;
+  box.appendChild(div);
+  box.scrollTop = box.scrollHeight;
+  return div;
+}
+
+function showTyping() {
+  const box = document.getElementById('chat-messages');
+  const div = document.createElement('div');
+  div.className = 'msg bot typing';
+  div.innerHTML = '<span></span><span></span><span></span>';
+  div.id = 'typing-ind';
+  box.appendChild(div);
+  box.scrollTop = box.scrollHeight;
+}
+
+function removeTyping() {
+  const t = document.getElementById('typing-ind');
+  if (t) t.remove();
+}
+
+async function getBotReply(userMsg) {
+  showTyping();
+  try {
+    const res = await fetch('/.netlify/functions/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: userMsg })
+    });
+    const data = await res.json();
+    removeTyping();
+    const reply = data.reply || "Thanks for reaching out! For the quickest help, give us a call at (720) 736-6855 or fill out the quote form above.";
+    addMsg(reply, 'bot');
+  } catch (e) {
+    removeTyping();
+    addMsg("Thanks for your question! For the fastest answer, call us at (720) 736-6855 or fill out the quote form on this page.", 'bot');
+  }
+}
+
+function submitForm() {
+  const fname = document.getElementById('f-fname').value.trim();
+  const lname = document.getElementById('f-lname').value.trim();
+  const phone = document.getElementById('f-phone').value.trim();
+  const email = document.getElementById('f-email').value.trim();
+  const service = document.getElementById('f-service').value;
+  const address = document.getElementById('f-address').value.trim();
+  const message = document.getElementById('f-message').value.trim();
+  const errEl = document.getElementById('form-error');
+  const btn = document.getElementById('submit-btn');
+
+  if (!fname || !phone) {
+    errEl.textContent = 'Please fill in at least your first name and phone number.';
+    errEl.style.display = 'block';
+    return;
+  }
+
+  errEl.style.display = 'none';
+  btn.textContent = 'SENDING...';
+  btn.disabled = true;
+
+  const templateParams = {
+    to_email: 'info@brodinconstruction.com',
+    from_name: fname + ' ' + lname,
+    from_phone: phone || 'Not provided',
+    from_email: email || 'Not provided',
+    service: service || 'Not specified',
+    address: address || 'Not provided',
+    message: message || 'No details provided',
+  };
+
+  emailjs.send('service_brodin', 'template_quote_request', templateParams)
+    .then(() => {
+      document.getElementById('form-body').style.display = 'none';
+      document.getElementById('form-success').style.display = 'block';
+    })
+    .catch((err) => {
+      console.error('EmailJS error:', err);
+      btn.textContent = 'SEND MY REQUEST →';
+      btn.disabled = false;
+      errEl.textContent = 'There was an error sending your request. Please call us directly at (720) 736-6855.';
+      errEl.style.display = 'block';
+    });
+}
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  // Initialize EmailJS with your public key
+  // Sign up free at emailjs.com, create a service + template, then replace these values:
+  // 1. Replace 'YOUR_PUBLIC_KEY' below with your EmailJS public key
+  // 2. In submitForm(), replace 'service_brodin' with your Service ID
+  // 3. In submitForm(), repl
